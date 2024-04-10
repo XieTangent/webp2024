@@ -1,0 +1,39 @@
+<html>
+
+<body>
+    <button onclick="getimg()">Get IMG</button>
+    <div id='gallery' class="gallery"></div>
+    <script>
+        var dataUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=ca370d51a054836007519a00ff4ce59e&per_page=10&format=json&nojsoncallback=1';
+        var img_Url =  'https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=ca370d51a054836007519a00ff4ce59e&photo_id=53608779187&format=json&nojsoncallback=1';
+
+        function getimg() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET',
+                dataUrl, true);
+            xhr.send();
+            xhr.onload = function() {
+                var data = JSON.parse(this.responseText);
+                add_new_img(data.photos.photo);
+            }
+        }
+
+        function add_new_img(dataset) {
+            var gal = document.getElementById("gallery");
+            dataset.forEach(function(item) {
+                var img = document.createElement("img");
+                var new_Img_Url = img_Url.replace('53608779187', item.id);
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET',new_Img_Url, true);
+                xhr.send();
+                xhr.onload = function() {
+                var photo = JSON.parse(this.responseText);
+                img.setAttribute("src", photo.sizes.size[5].source);
+                gal.appendChild(img);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
