@@ -1,10 +1,13 @@
-import React from 'react';
-import SightseeingInfo from './SightseeingInfo';
+import multiButton from './cgu_multiButton';
+import HelloCGU from './cgu_HelloCGU'
+import CGU_Login from './cgu_login';
 
 function App() {
   return (
     <div className="App">
-      <SightseeingInfo />
+      <div>
+        { CGU_Login() }
+      </div>
     </div>
   );
 }

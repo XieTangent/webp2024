@@ -1,0 +1,4 @@
+button:active {
+  background-color: red; /* 更改按钮背景颜色为红色 */
+  color: white; /* 更改文字颜色为白色 */
+}
